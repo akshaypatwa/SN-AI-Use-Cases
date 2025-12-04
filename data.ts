@@ -1,3 +1,4 @@
+
 export interface UseCase {
   id: number;
   icon: string;
@@ -6,7 +7,141 @@ export interface UseCase {
   tag?: string;
   infographicHTML: string;
   architectureHTML: string;
+  solutionFlowHTML?: string;
 }
+
+const useCase1Infographic = `
+    <div class="infographic-container">
+        <header class="infographic-header animate-fade-in-down">
+            <h2>The Future of Incident Management</h2>
+            <p>Leveraging ServiceNow's AI to automate, predict, and proactively resolve IT issues.</p>
+        </header>
+
+        <section class="infographic-section animate-fade-in-up" style="animation-delay: 100ms;">
+            <h3>Phase 1: AI for Data Integrity & Analytics</h3>
+            <p class="section-subtitle">Using Predictive Intelligence, the system analyzes historical data to predict and suggest values for fields on new incidents, ensuring consistency and saving agent time.</p>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <h4>How It Works in Detail</h4>
+                    <div class="step-list">
+                       <div class="step-item"><div>1</div><p><span>Predictive Intelligence Setup:</span> A Classification solution learns from resolved incidents, mapping descriptions to correct Impact, Urgency, and Cause Codes.</p></div>
+                       <div class="step-item"><div>2</div><p><span>Train the Model:</span> The system automatically trains on your historical data, learning patterns</p></div>
+                       <div class="step-item"><div>3</div><p><span>(Optional) Use Now Assist Skill:</span> Now Assist Skill helps to summarize, understand and provide smarter responses.</p></div>
+                       <div class="step-item"><div>3</div><p><span>Apply the Model:</span> As an agent types, the model runs in real-time, proposing best-fit values for one-click auto-population.</p></div>
+                    </div>
+                    <div class="stat-highlight">
+                        <span class="stat-number">45%</span>
+                        <p class="stat-label">Reduction in Manual Field Entry Time</p>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <h4>High-Level Flow</h4>
+                    <div class="flow-diagram">
+                        <div class="flow-card"><span>1. Agent Creates Incident</span><p>The process starts in the ServiceNow platform.</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card"><span>2. AI Analyzes Description</span><p>Now Assist / Predictive intelligence analyzes text in real-time.</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card"><span>3. AI Proposes Fields</span><p>Predicts Impact, Urgency, Cause Code, etc.</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card highlight"><span>4. Agent Reviews & Accepts</span><p>Final confirmation with one click.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="infographic-section animate-fade-in-up" style="animation-delay: 200ms;">
+            <div class="grid-container reverse">
+                <div class="grid-item">
+                    <h4>Impact on Root Cause Analysis</h4>
+                    <p>By automatically linking incidents to the changes that may have caused them, the AI provides immediate context, drastically reducing RCA time.</p>
+                    <div class="chart-container">
+                        <canvas id="timeToResolveChart"></canvas>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <h3>Phase 2: Proactive Incident & Change Linking</h3>
+                    <p>The AI Agent identifies and creates critical connections between incidents and change requests, ensuring a complete, accurate history.</p>
+                    <div class="step-list">
+                       <div class="step-item"><div>1</div><p><span>AI Agent Triggers:</span> Activates when an incident is created or updated.</p></div>
+                       <div class="step-item"><div>2</div><p><span>Analyzes Context:</span> Scans notes for keywords like "maintenance" or "CRQ number".</p></div>
+                       <div class="step-item"><div>3</div><p><span>Proposes Link:</span> Automatically suggests linking the incident to a relevant change record.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="infographic-section animate-fade-in-up" style="animation-delay: 300ms;">
+             <div class="infographic-header">
+                <h3>Phase 3: Automated Recurring Incident Detection</h3>
+                <p>The shift from reactive to proactive problem management. The AI identifies systemic patterns, allowing teams to address the root cause and prevent future incidents.</p>
+            </div>
+            <div class="grid-container">
+                 <div class="grid-item">
+                     <div class="flow-diagram vertical">
+                        <div class="flow-card"><div>🎟️</div><p class="font-semibold">Multiple Similar Incidents Created</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card"><div>🤖</div><p class="font-semibold">Now Assist Identifies a Pattern</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card highlight"><div>💡</div><p class="font-semibold">AI Agent Recommends existing tickets of same nature</p></div>
+                    </div>
+                 </div>
+                 <div class="grid-item">
+                    <h4>Projected Reduction in Recurring Incidents</h4>
+                    <p>By elevating recurring issues into a formal problem, teams can focus on permanent fixes, leading to a sustained drop in incident volume.</p>
+                    <div class="chart-container">
+                        <canvas id="recurringIncidentsChart"></canvas>
+                    </div>
+                 </div>
+            </div>
+        </section>
+    </div>
+`;
+
+const useCase1Architecture = `
+    <div class="infographic-container">
+        <header class="infographic-header animate-fade-in-down">
+            <h2>ITSM Solution Architecture</h2>
+            <p>This diagram outlines the system components, integrations, and data flows for the AI-powered ITSM solution.</p>
+        </header>
+        <section class="infographic-section animate-fade-in-up">
+            <h3 style="text-align: center;">[Architecture Diagram Placeholder]</h3>
+            <p style="text-align: center; color: #A0AEC0;">A detailed visual diagram will be embedded here, showing the interaction between ServiceNow, AI models, and external systems.</p>
+        </section>
+    </div>
+`;
+
+const useCase1SolutionFlow = `
+    <div class="infographic-container">
+        <header class="infographic-header animate-fade-in-down">
+            <h2>Solution & Flow</h2>
+            <p>Comprehensive breakdown of the solution logic, decision points, and data flow.</p>
+        </header>
+        <section class="infographic-section animate-fade-in-up">
+            <h3>Process Logic</h3>
+            <div class="grid-container">
+                <div class="grid-item">
+                     <div class="flow-diagram">
+                        <div class="flow-card"><span>Start</span><p>Incident Created</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card highlight"><span>Analyze</span><p>AI scans short description</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card"><span>Predict</span><p>Category & Priority Assigned</p></div>
+                        <div class="flow-arrow">&darr;</div>
+                        <div class="flow-card"><span>Resolve</span><p>Route to Assignment Group</p></div>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <h4>Key Decision Points</h4>
+                    <ul class="step-list">
+                        <li class="step-item"><p><span>Confidence Score Check:</span> Is the AI confidence > 80%?</p></li>
+                        <li class="step-item"><p><span>Availability Check:</span> Are agents available in the predicted group?</p></li>
+                        <li class="step-item"><p><span>Automation Trigger:</span> Can this be resolved by Virtual Agent?</p></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+`;
 
 export const initialUseCases: UseCase[] = [
   {
@@ -15,104 +150,19 @@ export const initialUseCases: UseCase[] = [
       tag: 'Featured',
       icon: 'fa-cogs',
       description: 'Integrate AI in ServiceNow to auto-populate critical fields, link incidents with changes, and detect recurring issues using machine learning and NLP for higher accuracy and proactive incident management.',
-      infographicHTML: `
-          <div class="infographic-container">
-              <header class="infographic-header animate-fade-in-down">
-                  <h2>The Future of Incident Management</h2>
-                  <p>Leveraging ServiceNow's AI to automate, predict, and proactively resolve IT issues.</p>
-              </header>
-
-              <section class="infographic-section animate-fade-in-up" style="animation-delay: 100ms;">
-                  <h3>Phase 1: AI for Data Integrity & Analytics</h3>
-                  <p class="section-subtitle">Using Predictive Intelligence, the system analyzes historical data to predict and suggest values for fields on new incidents, ensuring consistency and saving agent time.</p>
-                  <div class="grid-container">
-                      <div class="grid-item">
-                          <h4>How It Works in Detail</h4>
-                          <div class="step-list">
-                             <div class="step-item"><div>1</div><p><span>Predictive Intelligence Setup:</span> A Classification solution learns from resolved incidents, mapping descriptions to correct Impact, Urgency, and Cause Codes.</p></div>
-                             <div class="step-item"><div>2</div><p><span>Train the Model:</span> The system automatically trains on your historical data, learning patterns</p></div>
-                             <div class="step-item"><div>3</div><p><span>(Optional) Use Now Assist Skill:</span> Now Assist Skill helps to summarize, understand and provide smarter responses.</p></div>
-                             <div class="step-item"><div>3</div><p><span>Apply the Model:</span> As an agent types, the model runs in real-time, proposing best-fit values for one-click auto-population.</p></div>
-                          </div>
-                          <div class="stat-highlight">
-                              <span class="stat-number">45%</span>
-                              <p class="stat-label">Reduction in Manual Field Entry Time</p>
-                          </div>
-                      </div>
-                      <div class="grid-item">
-                          <h4>High-Level Flow</h4>
-                          <div class="flow-diagram">
-                              <div class="flow-card"><span>1. Agent Creates Incident</span><p>The process starts in the ServiceNow platform.</p></div>
-                              <div class="flow-arrow">&darr;</div>
-                              <div class="flow-card"><span>2. AI Analyzes Description</span><p>Now Assist analyzes text in real-time.</p></div>
-                              <div class="flow-arrow">&darr;</div>
-                              <div class="flow-card"><span>3. AI Proposes Fields</span><p>Predicts Impact, Urgency, Cause Code, etc.</p></div>
-                              <div class="flow-arrow">&darr;</div>
-                              <div class="flow-card highlight"><span>4. Agent Reviews & Accepts</span><p>Final confirmation with one click.</p></div>
-                          </div>
-                      </div>
-                  </div>
-              </section>
-
-              <section class="infographic-section animate-fade-in-up" style="animation-delay: 200ms;">
-                  <div class="grid-container reverse">
-                      <div class="grid-item">
-                          <h4>Impact on Root Cause Analysis</h4>
-                          <p>By automatically linking incidents to the changes that may have caused them, the AI provides immediate context, drastically reducing RCA time.</p>
-                          <div class="chart-container">
-                              <canvas id="timeToResolveChart"></canvas>
-                          </div>
-                      </div>
-                      <div class="grid-item">
-                          <h3>Phase 2: Proactive Incident & Change Linking</h3>
-                          <p>The AI Agent identifies and creates critical connections between incidents and change requests, ensuring a complete, accurate history.</p>
-                          <div class="step-list">
-                             <div class="step-item"><div>1</div><p><span>AI Agent Triggers:</span> Activates when an incident is created or updated.</p></div>
-                             <div class="step-item"><div>2</div><p><span>Analyzes Context:</span> Scans notes for keywords like "maintenance" or "CRQ number".</p></div>
-                             <div class="step-item"><div>3</div><p><span>Proposes Link:</span> Automatically suggests linking the incident to a relevant change record.</p></div>
-                          </div>
-                      </div>
-                  </div>
-              </section>
-
-              <section class="infographic-section animate-fade-in-up" style="animation-delay: 300ms;">
-                   <div class="infographic-header">
-                      <h3>Phase 3: Automated Recurring Incident Detection</h3>
-                      <p>The shift from reactive to proactive problem management. The AI identifies systemic patterns, allowing teams to address the root cause and prevent future incidents.</p>
-                  </div>
-                  <div class="grid-container">
-                       <div class="grid-item">
-                           <div class="flow-diagram vertical">
-                              <div class="flow-card"><div>🎟️</div><p class="font-semibold">Multiple Similar Incidents Created</p></div>
-                              <div class="flow-arrow">&darr;</div>
-                              <div class="flow-card"><div>🤖</div><p class="font-semibold">Now Assist Identifies a Pattern</p></div>
-                              <div class="flow-arrow">&darr;</div>
-                              <div class="flow-card highlight"><div>💡</div><p class="font-semibold">AI Agent Recommends existing tickets of same nature</p></div>
-                          </div>
-                       </div>
-                       <div class="grid-item">
-                          <h4>Projected Reduction in Recurring Incidents</h4>
-                          <p>By elevating recurring issues into a formal problem, teams can focus on permanent fixes, leading to a sustained drop in incident volume.</p>
-                          <div class="chart-container">
-                              <canvas id="recurringIncidentsChart"></canvas>
-                          </div>
-                       </div>
-                  </div>
-              </section>
-          </div>
-      `,
-      architectureHTML: `
-          <div class="infographic-container">
-              <header class="infographic-header animate-fade-in-down">
-                  <h2>ITSM Solution Architecture</h2>
-                  <p>This diagram outlines the system components, integrations, and data flows for the AI-powered ITSM solution.</p>
-              </header>
-              <section class="infographic-section animate-fade-in-up">
-                  <h3 style="text-align: center;">[Architecture Diagram Placeholder]</h3>
-                  <p style="text-align: center; color: #A0AEC0;">A detailed visual diagram will be embedded here, showing the interaction between ServiceNow, AI models, and external systems.</p>
-              </section>
-          </div>
-      `
+      infographicHTML: useCase1Infographic,
+      architectureHTML: useCase1Architecture,
+      solutionFlowHTML: useCase1SolutionFlow
+  },
+  {
+      id: 101, // Duplicate of ID 1
+      title: 'AI Powered ServiceNow for Data Integrity, Accuracy and Analytics (Copy)',
+      tag: 'Featured',
+      icon: 'fa-cogs',
+      description: 'Integrate AI in ServiceNow to auto-populate critical fields, link incidents with changes, and detect recurring issues using machine learning and NLP for higher accuracy and proactive incident management.',
+      infographicHTML: useCase1Infographic,
+      architectureHTML: useCase1Architecture,
+      solutionFlowHTML: useCase1SolutionFlow
   },
   { 
       id: 2, 

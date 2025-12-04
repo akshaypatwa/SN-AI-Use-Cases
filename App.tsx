@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { initialUseCases, UseCase } from './data';
 import { UseCaseCard } from './components/UseCaseCard';
 import { EditPanel } from './components/EditPanel';
@@ -74,24 +75,28 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen text-gray-200 p-4 sm:p-6 lg:p-8 relative">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 relative">
       <div className="container mx-auto max-w-7xl relative z-10">
-        <header className="text-center my-16 relative animate-fade-in-down">
-          <h1 className="text-5xl sm:text-7xl font-bold gradient-text">
-            ServiceNow Use Cases
-          </h1>
-          <p className="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">
-            Explore powerful capabilities of the ServiceNow platform.
-            {!isEditMode && (
-              <button 
-                onClick={() => setIsEditMode(true)} 
-                className="ml-2 text-gray-400 hover:text-[var(--accent-color)] transition-colors text-sm font-semibold group"
-                title="Edit Page"
-              >
-                Edit Page <i className="fas fa-pencil-alt ml-1 opacity-70 group-hover:opacity-100 transition-opacity"></i>
-              </button>
-            )}
-          </p>
+        <header className="page-header text-center my-4 relative animate-fade-in-down">
+            <div className="edit-page-button-container">
+                {!isEditMode && (
+                  <button 
+                    onClick={() => setIsEditMode(true)} 
+                    className="text-[var(--text-secondary)] hover:text-[var(--accent-start)] transition-colors text-sm font-semibold group p-2 rounded-md hover:bg-white/10"
+                    title="Edit Page"
+                  >
+                    <i className="fas fa-pencil-alt mr-1 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    Edit Page
+                  </button>
+                )}
+            </div>
+
+            <h1 className="header-title">
+                ServiceNow Use Cases
+            </h1>
+            <p className="header-subtitle">
+                Explore powerful capabilities of the <span>ServiceNow platform.</span>
+            </p>
         </header>
         
         {isEditMode && (
@@ -115,6 +120,7 @@ const App: React.FC = () => {
                 updateUseCase={updateUseCase}
                 onSelect={handleCardSelect}
                 cardHeight={cardHeight}
+                isDisabled={index > 1}
                 />
             </div>
           ))}
@@ -124,7 +130,7 @@ const App: React.FC = () => {
             <div className="glowing-circle-container pressable">
                 <button 
                     onClick={() => setIsModalOpen(true)} 
-                    className="demystify-button group relative inline-flex items-center justify-center gap-3 rounded-full bg-[var(--bg-color-base)] px-8 py-4 text-lg font-medium text-white transition-colors"
+                    className="demystify-button group relative inline-flex items-center justify-center gap-3 rounded-full bg-[var(--bg-color-base)] px-8 py-4 text-lg font-medium text-[var(--text-primary)] transition-colors"
                 >
                     <i className="fas fa-brain text-xl icon-gradient"></i>
                     Demystify GenAI

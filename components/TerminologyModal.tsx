@@ -66,37 +66,37 @@ const modalContentHTML = `
 
 const modalStyles = `
     .infographic-header { text-align: center; margin-bottom: 3rem; }
-    .infographic-header h2 { font-size: 2.5rem; color: #fff; margin: 0 0 0.5rem 0; border: none; font-weight: bold; }
-    .infographic-header p { font-size: 1.1rem; color: #9ca3af; max-width: 60ch; margin: 0 auto; }
+    .infographic-header h2 { font-size: 2.5rem; color: var(--text-primary); margin: 0 0 0.5rem 0; border: none; font-weight: bold; }
+    .infographic-header p { font-size: 1.1rem; color: var(--text-secondary); max-width: 60ch; margin: 0 auto; }
     .concept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
-    .concept-card { background: rgba(36, 41, 51, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .concept-card { background: var(--card-bg-translucent); border: 1px solid var(--card-border); border-radius: 12px; padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
     .concept-card i { font-size: 2.5rem; color: var(--accent-start); }
-    .concept-card h3 { font-size: 1.5rem; font-weight: 600; color: #fff; margin: 0; }
-    .concept-card p { font-size: 0.95rem; color: #9ca3af; line-height: 1.6; margin: 0; }
-    .tech-flow-diagram { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 2rem; background: hsla(185, 100%, 50%, 0.03); border: 1px solid hsla(185, 100%, 50%, 0.1); border-radius: 12px; }
-    .flow-node { background: rgba(36, 41, 51, 0.9); border: 1px solid hsla(185, 100%, 50%, 0.2); border-radius: 10px; padding: 1rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; min-width: 250px; z-index: 1; }
+    .concept-card h3 { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin: 0; }
+    .concept-card p { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    .tech-flow-diagram { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 1rem; padding: 2rem; background: var(--section-bg); border: 1px solid var(--section-border); border-radius: 12px; }
+    .flow-node { background: var(--card-bg-translucent); border: 1px solid hsla(170, 80%, 45%, 0.2); border-radius: 10px; padding: 1rem 1.5rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; min-width: 250px; z-index: 1; }
     .flow-node i { font-size: 1.5rem; }
-    .flow-node span { font-weight: 600; color: #fff; }
-    .flow-node p { font-size: 0.9rem; color: #9ca3af; margin: 0; }
+    .flow-node span { font-weight: 600; color: var(--text-primary); }
+    .flow-node p { font-size: 0.9rem; color: var(--text-secondary); margin: 0; }
     .flow-node.user-input { border-color: var(--accent-end); }
     .flow-node.user-input i { color: var(--accent-end); }
     .flow-node.agentic-ai { border-color: var(--accent-start); }
     .flow-node.agentic-ai i { color: var(--accent-start); }
     .flow-node.foundation { border-style: dashed; width: 80%; margin-top: 2rem; }
-    .flow-arrow-down { font-size: 1.5rem; color: #9ca3af; padding: 0.5rem 0; }
+    .flow-arrow-down { font-size: 1.5rem; color: var(--text-secondary); padding: 0.5rem 0; }
     .flow-arrow-down::before { content: '\\2193'; }
     .tools-branch { position: relative; width: 100%; display: flex; justify-content: center; padding: 1rem 0; margin-top: 1rem; }
-    .branch-line-down { width: 2px; height: 2rem; background: #9ca3af; position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
-    .branch-line-across { width: 80%; max-width: 600px; height: 2px; background: #9ca3af; position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); }
+    .branch-line-down { width: 2px; height: 2rem; background: var(--text-secondary); position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+    .branch-line-across { width: 80%; max-width: 600px; height: 2px; background: var(--text-secondary); position: absolute; top: 2rem; left: 50%; transform: translateX(-50%); }
     .tool-endpoints { display: flex; justify-content: space-around; width: 100%; margin-top: 2rem; gap: 1rem; flex-wrap: wrap; }
     .endpoint { position: relative; padding-top: 2rem; display: flex; flex-direction: column; align-items: center; }
-    .branch-line-down-short { width: 2px; height: 2rem; background: #9ca3af; position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+    .branch-line-down-short { width: 2px; height: 2rem; background: var(--text-secondary); position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
     .flow-node.tool { min-width: 180px; }
-    .flow-arrow-down-small { font-size: 1.2rem; color: #9ca3af; }
+    .flow-arrow-down-small { font-size: 1.2rem; color: var(--text-secondary); }
     .flow-arrow-down-small::before { content: '\\2193'; }
-    .flow-node-small { background: rgba(36, 41, 51, 0.8); border: 1px solid hsla(185, 100%, 50%, 0.1); border-radius: 8px; padding: 0.5rem 1rem; text-align: center; display: flex; align-items: center; gap: 0.5rem; }
-    .flow-node-small i { font-size: 0.9rem; color: #9ca3af; }
-    .flow-node-small span { font-size: 0.9rem; font-weight: 500; color: #e5e7eb; }
+    .flow-node-small { background: var(--card-bg-translucent); border: 1px solid var(--card-border); border-radius: 8px; padding: 0.5rem 1rem; text-align: center; display: flex; align-items: center; gap: 0.5rem; }
+    .flow-node-small i { font-size: 0.9rem; color: var(--text-secondary); }
+    .flow-node-small span { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); }
 `;
 
 export const TerminologyModal: React.FC<TerminologyModalProps> = ({ onClose }) => {
