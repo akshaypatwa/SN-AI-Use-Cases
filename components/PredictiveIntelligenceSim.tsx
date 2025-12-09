@@ -6,31 +6,23 @@ import {
   CheckCircle2, 
   Zap, 
   TrendingUp, 
-  DollarSign, 
-  Users, 
   Layers, 
   Search,
-  ArrowRight,
-  MousePointer2,
-  Save,
-  XCircle,
-  BarChart3,
+  ArrowLeft,
+  ChevronRight,
   Activity,
   Sparkles,
   RefreshCw,
-  Server,
-  Monitor,
-  AlertCircle,
-  Lightbulb,
   FileText,
   Database,
-  ArrowDown,
-  ArrowRight as ArrowRightIcon,
   Play,
   Pause,
-  RotateCcw,
-  ArrowLeft,
-  ChevronRight
+  MousePointer2,
+  XCircle,
+  Lightbulb,
+  Save,
+  SkipForward,
+  AlertCircle
 } from 'lucide-react';
 
 interface Props {
@@ -57,10 +49,10 @@ export const PredictiveIntelligenceSim: React.FC<Props> = ({ onBack }) => {
   const [highlightUpdates, setHighlightUpdates] = useState(false);
   
   // Simulation State
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isAutoPlay, setIsAutoPlay] = useState(false); // Default to Paused
   const [simStep, setSimStep] = useState(0);
   const [cursorPos, setCursorPos] = useState({ top: '60%', left: '50%' });
-  const [showCursor, setShowCursor] = useState(false);
+  const [showCursor, setShowCursor] = useState(true);
   const [clickEffect, setClickEffect] = useState(false);
 
   // Process Pipeline Animation State
@@ -81,64 +73,64 @@ export const PredictiveIntelligenceSim: React.FC<Props> = ({ onBack }) => {
 
   // --- SIMULATION LOOP ---
   useEffect(() => {
-    if (!isAutoPlay) {
-      setShowCursor(false);
-      return;
-    }
+    // Always show cursor when simulation is active (manual or auto)
+    setShowCursor(true);
 
     let timeout: any;
-    const runStep = (delay: number, nextStep: number, action?: () => void) => {
-      timeout = setTimeout(() => {
-        if (action) action();
-        setSimStep(nextStep);
-      }, delay);
+    
+    // Helper to schedule next step if auto-play is on
+    const scheduleNext = (delay: number, nextStep: number) => {
+      if (isAutoPlay) {
+        timeout = setTimeout(() => {
+          setSimStep(nextStep);
+        }, delay);
+      }
     };
-
-    setShowCursor(true);
 
     switch (simStep) {
       case 0: // Start / Reset
-        setFormState(initialFormState);
-        setShowModal(false);
-        setIsAnalyzing(false);
-        setHighlightUpdates(false);
-        setCursorPos({ top: '60%', left: '50%' }); // Center start
-        runStep(2000, 1);
+        if (simStep === 0) {
+            setFormState(initialFormState);
+            setShowModal(false);
+            setIsAnalyzing(false);
+            setHighlightUpdates(false);
+            setCursorPos({ top: '60%', left: '50%' }); // Center start
+        }
+        scheduleNext(2000, 1);
         break;
 
       case 1: // Move to Predict Button
-        setCursorPos({ top: '28px', left: 'calc(100% - 60px)' }); // Target Predict Button (Fixed top px for header)
-        runStep(2500, 2);
+        setCursorPos({ top: '28px', left: 'calc(100% - 60px)' }); // Target Predict Button
+        scheduleNext(2500, 2);
         break;
 
       case 2: // Click Predict
         setClickEffect(true);
         setTimeout(() => setClickEffect(false), 300);
         handlePredictClick(); // Trigger Logic
-        runStep(1000, 3);
+        scheduleNext(1000, 3);
         break;
 
-      case 3: // Wait for Analysis (handled by logic, but we sync step)
+      case 3: // Wait for Analysis
         // Analysis takes 2500ms in handlePredictClick
-        runStep(3000, 4); 
+        scheduleNext(3000, 4); 
         break;
 
       case 4: // Modal is open, Move to Apply Button
-        // Modal Apply button position approx
         setCursorPos({ top: 'calc(50% + 130px)', left: 'calc(50% + 130px)' }); 
-        runStep(3000, 5); // Increased time to read modal
+        scheduleNext(3000, 5); // Increased time to read modal
         break;
 
       case 5: // Click Apply
         setClickEffect(true);
         setTimeout(() => setClickEffect(false), 300);
         handleSave(); // Trigger Save Logic
-        runStep(1000, 6);
+        scheduleNext(1000, 6);
         break;
 
       case 6: // Observe Result
         setCursorPos({ top: '90%', left: '90%' }); // Move away
-        runStep(6000, 0); // Loop back to start
+        scheduleNext(6000, 0); // Loop back to start
         break;
 
       default:
@@ -174,7 +166,12 @@ export const PredictiveIntelligenceSim: React.FC<Props> = ({ onBack }) => {
 
   const toggleAutoPlay = () => {
     setIsAutoPlay(!isAutoPlay);
-    if (!isAutoPlay) setSimStep(0); // Restart when enabling
+    if (!isAutoPlay && simStep === 0) setSimStep(1); // Start if at beginning
+  };
+
+  const handleManualNext = () => {
+    setIsAutoPlay(false); // Stop auto-play if interacting manually
+    setSimStep((prev) => (prev + 1) % 7);
   };
 
   // Helper class for the update highlight effect
@@ -421,16 +418,28 @@ export const PredictiveIntelligenceSim: React.FC<Props> = ({ onBack }) => {
             <div className="lg:w-1/3 space-y-8 flex flex-col justify-center">
               <div>
                 <h2 className="text-3xl font-bold text-white mb-4">Process Simulator</h2>
-                <div className="flex items-center gap-4 mb-4">
+                <div className="flex flex-col gap-3 mb-4">
                   <h3 className="text-xl text-emerald-400">Workflow Automation</h3>
-                  {/* AUTO-PLAY TOGGLE */}
-                  <button 
-                    onClick={toggleAutoPlay}
-                    className={`flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold border transition-all ${isAutoPlay ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50' : 'bg-slate-800 text-slate-400 border-slate-600'}`}
-                  >
-                    {isAutoPlay ? <Pause size={12} /> : <Play size={12} />}
-                    {isAutoPlay ? 'RUNNING' : 'PAUSED'}
-                  </button>
+                  <div className="flex items-center gap-2">
+                      {/* AUTO-PLAY TOGGLE */}
+                      <button 
+                        onClick={toggleAutoPlay}
+                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold border transition-all ${isAutoPlay ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50' : 'bg-slate-800 text-slate-400 border-slate-600'}`}
+                      >
+                        {isAutoPlay ? <Pause size={14} /> : <Play size={14} />}
+                        {isAutoPlay ? 'RUNNING' : 'PAUSED'}
+                      </button>
+                      
+                      {/* MANUAL NEXT STEP */}
+                      <button 
+                        onClick={handleManualNext}
+                        disabled={isAnalyzing}
+                        className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-xs font-bold border border-slate-600 transition-all ${isAnalyzing ? 'opacity-50 cursor-not-allowed bg-slate-800 text-slate-500' : 'bg-slate-800 text-white hover:bg-slate-700 hover:border-slate-500 active:scale-95'}`}
+                      >
+                        <SkipForward size={14} />
+                        NEXT STEP
+                      </button>
+                  </div>
                 </div>
                 
                 <p className="text-slate-400 leading-relaxed mb-6">

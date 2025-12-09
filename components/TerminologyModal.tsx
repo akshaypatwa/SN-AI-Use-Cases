@@ -65,24 +65,6 @@ const modalContentHTML = `
 `;
 
 const modalStyles = `
-    .infographic-header h2 { color: #f1f5f9; }
-    .infographic-header p { color: #94a3b8; }
-    .concept-card { background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(52, 211, 153, 0.2); }
-    .concept-card i { color: #34d399; }
-    .concept-card h3 { color: #f1f5f9; }
-    .concept-card p { color: #94a3b8; }
-    .tech-flow-diagram { background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(52, 211, 153, 0.2); }
-    .flow-node { background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(52, 211, 153, 0.3); }
-    .flow-node span { color: #f1f5f9; }
-    .flow-node p { color: #94a3b8; }
-    .flow-node.user-input i { color: #34d399; }
-    .flow-node.agentic-ai i { color: #34d399; }
-    .flow-arrow-down, .flow-arrow-down-small { color: #94a3b8; }
-    .branch-line-down, .branch-line-across, .branch-line-down-short { background: #94a3b8; }
-    .flow-node-small { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(52, 211, 153, 0.2); }
-    .flow-node-small i { color: #94a3b8; }
-    .flow-node-small span { color: #f1f5f9; }
-    /* Keeping the rest of the styles for layout */
     .infographic-header { text-align: center; margin-bottom: 3rem; }
     .infographic-header h2 { font-size: 2.5rem; color: var(--text-primary); margin: 0 0 0.5rem 0; border: none; font-weight: bold; }
     .infographic-header p { font-size: 1.1rem; color: var(--text-secondary); max-width: 60ch; margin: 0 auto; }
@@ -124,13 +106,13 @@ export const TerminologyModal: React.FC<TerminologyModalProps> = ({ onClose }) =
       onClick={onClose}
     >
       <div 
-        className="rounded-lg border border-emerald-500/20 bg-slate-900/60 shadow-lg backdrop-filter backdrop-blur-lg w-full max-w-6xl max-h-[90vh] overflow-y-auto p-8 relative animate-scale-in"
+        className="glass-card rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-y-auto p-8 relative animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         <style>{modalStyles}</style>
         <button 
           onClick={onClose} 
-          className="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-4xl transition-colors z-10"
+          className="absolute top-4 right-4 text-gray-400 hover:text-white text-4xl transition-colors z-10"
           aria-label="Close"
         >&times;</button>
         <div dangerouslySetInnerHTML={{ __html: modalContentHTML }} />

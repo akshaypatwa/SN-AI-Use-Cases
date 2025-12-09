@@ -5,7 +5,6 @@ import { UseCaseCard } from './components/UseCaseCard';
 import { EditPanel } from './components/EditPanel';
 import { TerminologyModal } from './components/TerminologyModal';
 import { UseCaseDetail } from './components/UseCaseDetail';
-import { Background } from './components/Background';
 
 const App: React.FC = () => {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
@@ -141,8 +140,8 @@ const App: React.FC = () => {
         
         {isModalOpen && <TerminologyModal onClose={() => setIsModalOpen(false)} />}
         
-        <footer className="text-center mt-24 py-6 border-t border-emerald-500/20">
-          <p className="text-slate-400">&copy; 2025 ServiceNow Use Case Showcase</p>
+        <footer className="text-center mt-24 py-6 border-t border-white/10">
+          <p className="text-gray-500">&copy; 2025 ServiceNow Use Case Showcase</p>
         </footer>
       </div>
     </div>

@@ -49,7 +49,7 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({ useCase, isEditMode, u
         )}
         
         <div className="mb-4 pt-4">
-          <i className={`fas ${useCase.icon} fa-2x text-emerald-400`}></i>
+          <i className={`fas ${useCase.icon} fa-2x icon-gradient`}></i>
         </div>
         <h3
           className="text-xl font-bold text-[var(--text-primary)] mb-2"

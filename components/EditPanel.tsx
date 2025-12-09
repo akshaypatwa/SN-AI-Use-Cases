@@ -67,7 +67,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
             onChange={(e) => setViewName(e.target.value)}
             className={inputBaseStyle}
           />
-          <button onClick={handleSave} title="Save current view" className={`${buttonBaseStyle} bg-emerald-600 hover:bg-emerald-500 text-white`}><i className="fas fa-save"></i></button>
+          <button onClick={handleSave} title="Save current view" className={`${buttonBaseStyle} btn-accent`}><i className="fas fa-save"></i></button>
         </div>
         
         {/* Load/Delete View */}
@@ -81,7 +81,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
             <option value="">Load a saved view...</option>
             {savedViews.map(name => <option key={name} value={name}>{name}</option>)}
           </select>
-          <button onClick={handleLoad} disabled={!selectedView} title="Load the selected view" className={`${buttonBaseStyle} bg-emerald-600 hover:bg-emerald-500 text-white`}><i className="fas fa-download"></i></button>
+          <button onClick={handleLoad} disabled={!selectedView} title="Load the selected view" className={`${buttonBaseStyle} bg-blue-600 hover:bg-blue-500 text-white`}><i className="fas fa-download"></i></button>
           <button onClick={handleDelete} disabled={!selectedView} title="Delete the selected view" className={`${buttonBaseStyle} bg-red-600 hover:bg-red-500 text-white`}><i className="fas fa-trash"></i></button>
         </div>
         

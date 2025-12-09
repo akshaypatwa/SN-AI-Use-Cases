@@ -37,7 +37,7 @@ const detailStyles = `
 .flow-card span { font-weight: 600; }
 .flow-card p { font-size: 0.9rem; color: var(--text-secondary) !important; margin-top: 0.25rem; }
 .flow-card div { font-size: 2rem; }
-.flow-arrow { font-size: 1.5rem; font-weight: bold; }
+.flow-arrow { color: var(--accent-start); font-size: 1.5rem; font-weight: bold; }
 .chart-container { position: relative; width: 100%; height: 300px; margin-top: 1.5rem; }
 .step-list .step-item { display: flex; align-items: center; gap: 1rem; background: var(--card-bg); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid var(--section-border); }
 .step-list .step-item div { flex-shrink: 0; background: var(--accent-start); color: #111317; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; font-weight: bold; }
@@ -74,7 +74,7 @@ const ContentTile: React.FC<{ icon: string; title: string; description: string; 
     return (
         <div 
             onClick={onClick} 
-            className="rounded-lg border border-emerald-500/20 bg-slate-900/60 p-6 shadow-lg backdrop-filter backdrop-blur-lg cursor-pointer h-full group animate-fade-in-up opacity-0 transition-all duration-300 hover:border-emerald-500/40 hover:shadow-emerald-500/10"
+            className="showcase-card rounded-2xl cursor-pointer h-full group animate-fade-in-up opacity-0"
             style={{ animationDelay: `${delay}ms` }}
         >
             <div className="relative z-10 p-6 flex flex-col h-full bg-[var(--card-bg)] rounded-[calc(1rem-1px)]">
@@ -256,8 +256,8 @@ export const UseCaseDetail: React.FC<UseCaseDetailProps> = ({ useCase, onBack })
 
         {modalHtml && (
             <div className="fixed inset-0 bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-fade-in" onClick={closeModal}>
-                <div className="relative rounded-lg border border-emerald-500/20 bg-slate-900/80 shadow-lg backdrop-filter backdrop-blur-lg w-full max-w-6xl h-[95vh] animate-scale-in" onClick={e => e.stopPropagation()}>
-                    <button onClick={closeModal} className="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-4xl z-10">&times;</button>
+                <div className="relative glass-card rounded-2xl w-full max-w-6xl h-[95vh] animate-scale-in" onClick={e => e.stopPropagation()}>
+                    <button onClick={closeModal} className="absolute top-4 right-4 text-gray-400 hover:text-white text-4xl z-10">&times;</button>
                     <div ref={modalBodyRef} className="h-full overflow-y-auto p-8" dangerouslySetInnerHTML={{ __html: modalHtml }} />
                 </div>
             </div>
