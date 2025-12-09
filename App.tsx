@@ -76,7 +76,6 @@ const App: React.FC = () => {
   }
 
   return (
-<<<<<<< HEAD
     <div className="min-h-screen p-4 sm:p-6 lg:p-8 relative">
       <div className="container mx-auto max-w-7xl relative z-10">
         <header className="page-header text-center my-4 relative animate-fade-in-down">

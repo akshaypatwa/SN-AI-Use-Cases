@@ -34,7 +34,6 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({ useCase, isEditMode, u
       animation: 'pulse-glow 2s infinite ease-in-out'
   } : {};
 
-<<<<<<< HEAD
   const isEditable = isEditMode && !isDisabled;
 
   // Extracted content to reuse in both enabled and disabled states

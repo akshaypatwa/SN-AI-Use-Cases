@@ -265,3 +265,5 @@ export const UseCaseDetail: React.FC<UseCaseDetailProps> = ({ useCase, onBack })
       </div>
       <style>{detailStyles}</style>
     </div>
+  );
+};

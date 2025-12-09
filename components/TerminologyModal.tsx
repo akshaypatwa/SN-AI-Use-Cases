@@ -84,7 +84,6 @@ const modalStyles = `
     .flow-node-small span { color: #f1f5f9; }
     /* Keeping the rest of the styles for layout */
     .infographic-header { text-align: center; margin-bottom: 3rem; }
-<<<<<<< HEAD
     .infographic-header h2 { font-size: 2.5rem; color: var(--text-primary); margin: 0 0 0.5rem 0; border: none; font-weight: bold; }
     .infographic-header p { font-size: 1.1rem; color: var(--text-secondary); max-width: 60ch; margin: 0 auto; }
     .concept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; padding: 1rem 0; }
