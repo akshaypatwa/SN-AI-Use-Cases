@@ -2,6 +2,7 @@
   "name": "servicenow-use-case-showcase",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://akshaypatwa.github.io/SN-AI-Use-Cases",
   "type": "module",
   "scripts": {
     "dev": "vite",
