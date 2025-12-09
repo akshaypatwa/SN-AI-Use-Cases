@@ -50,12 +50,13 @@ export const EditPanel: React.FC<EditPanelProps> = ({
     }
   }
 
-  const buttonBaseStyle = "font-bold py-2 px-4 rounded-lg transition-all duration-300 flex-shrink-0 flex items-center gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed";
-  const inputBaseStyle = "bg-slate-900 border border-slate-700 text-slate-100 rounded-lg px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all duration-300";
+<<<<<<< HEAD
+  const buttonBaseStyle = "pressable font-bold py-2 px-4 rounded-lg transition-all duration-300 flex-shrink-0 flex items-center gap-2 shadow-md disabled:opacity-50 disabled:cursor-not-allowed";
+  const inputBaseStyle = "themed-input rounded-lg px-4 py-2 w-full focus:outline-none transition-all duration-300";
 
   return (
-    <div className="rounded-lg border border-emerald-500/20 bg-slate-900/60 p-6 shadow-lg backdrop-filter backdrop-blur-lg mb-12 animate-fade-in-down">
-      <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center"><i className="fas fa-pencil-alt mr-3 text-emerald-400"></i> Edit Mode</h3>
+    <div className="glass-card p-6 rounded-2xl mb-12 shadow-2xl animate-fade-in-down">
+      <h3 className="text-xl font-bold text-[var(--text-primary)] mb-4 flex items-center"><i className="fas fa-pencil-alt mr-3 icon-gradient"></i> Edit Mode</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center">
         {/* Save View */}
         <div className="flex items-center space-x-2">
@@ -87,7 +88,7 @@ export const EditPanel: React.FC<EditPanelProps> = ({
         
         {/* Card Height */}
         <div className="flex items-center justify-center space-x-4">
-            <span className="text-slate-100 font-semibold">Card Height:</span>
+            <span className="text-[var(--text-primary)] font-semibold">Card Height:</span>
             <button onClick={() => onChangeHeight(-20)} className={`${buttonBaseStyle} bg-slate-700 hover:bg-slate-600 text-white font-bold w-10 h-10 rounded-full transition-colors`} title="Decrease card height">-</button>
             <button onClick={() => onChangeHeight(20)} className={`${buttonBaseStyle} bg-slate-700 hover:bg-slate-600 text-white font-bold w-10 h-10 rounded-full transition-colors`} title="Increase card height">+</button>
         </div>

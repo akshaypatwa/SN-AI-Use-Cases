@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { initialUseCases, UseCase } from './data';
 import { UseCaseCard } from './components/UseCaseCard';
 import { EditPanel } from './components/EditPanel';
@@ -75,25 +76,29 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 lg:p-8 relative">
-      <Background />
+<<<<<<< HEAD
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 relative">
       <div className="container mx-auto max-w-7xl relative z-10">
-        <header className="text-center my-16 relative animate-fade-in-down">
-          <h1 className="text-5xl sm:text-7xl font-bold text-slate-100">
-            ServiceNow Use Cases
-          </h1>
-          <p className="text-lg text-slate-400 mt-4 max-w-2xl mx-auto">
-            Explore powerful capabilities of the ServiceNow platform.
-            {!isEditMode && (
-              <button
-                onClick={() => setIsEditMode(true)}
-                className="ml-2 text-slate-400 hover:text-emerald-400 transition-colors text-sm font-semibold group"
-                title="Edit Page"
-              >
-                Edit Page <i className="fas fa-pencil-alt ml-1 opacity-70 group-hover:opacity-100 transition-opacity"></i>
-              </button>
-            )}
-          </p>
+        <header className="page-header text-center my-4 relative animate-fade-in-down">
+            <div className="edit-page-button-container">
+                {!isEditMode && (
+                  <button 
+                    onClick={() => setIsEditMode(true)} 
+                    className="text-[var(--text-secondary)] hover:text-[var(--accent-start)] transition-colors text-sm font-semibold group p-2 rounded-md hover:bg-white/10"
+                    title="Edit Page"
+                  >
+                    <i className="fas fa-pencil-alt mr-1 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    Edit Page
+                  </button>
+                )}
+            </div>
+
+            <h1 className="header-title">
+                ServiceNow Use Cases
+            </h1>
+            <p className="header-subtitle">
+                Explore powerful capabilities of the <span>ServiceNow platform.</span>
+            </p>
         </header>
         
         {isEditMode && (
@@ -117,19 +122,22 @@ const App: React.FC = () => {
                 updateUseCase={updateUseCase}
                 onSelect={handleCardSelect}
                 cardHeight={cardHeight}
+                isDisabled={index > 2}
                 />
             </div>
           ))}
         </main>
         
         <section className="mt-28 mb-12 text-center">
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]"
-          >
-            <i className="fas fa-brain text-xl mr-2"></i>
-            Demystify GenAI
-          </button>
+            <div className="glowing-circle-container pressable">
+                <button 
+                    onClick={() => setIsModalOpen(true)} 
+                    className="demystify-button group relative inline-flex items-center justify-center gap-3 rounded-full bg-[var(--bg-color-base)] px-8 py-4 text-lg font-medium text-[var(--text-primary)] transition-colors"
+                >
+                    <i className="fas fa-brain text-xl icon-gradient"></i>
+                    Demystify GenAI
+                </button>
+            </div>
         </section>
         
         {isModalOpen && <TerminologyModal onClose={() => setIsModalOpen(false)} />}
