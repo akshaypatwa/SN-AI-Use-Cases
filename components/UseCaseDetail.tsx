@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { UseCase } from '../data';
 import { PredictiveIntelligenceSim } from './PredictiveIntelligenceSim';
 import ServiceNowInfographic from './ServiceNowInfographic';
+import { VirtualAgentSim } from './VirtualAgentSim';
 
 declare const Chart: any;
 
@@ -87,6 +88,27 @@ const ContentTile: React.FC<{ icon: string; title: string; description: string; 
         </div>
     );
 };
+
+// Simple placeholder for Coming Soon simulations
+const ComingSoonSim: React.FC<{ onBack: () => void }> = ({ onBack }) => (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#020617] p-4 animate-fade-in">
+        <div className="text-center">
+            <div className="mb-6 inline-flex items-center justify-center w-20 h-20 rounded-full bg-slate-800 border border-slate-700 text-slate-400">
+                <i className="fas fa-tools text-3xl"></i>
+            </div>
+            <h2 className="text-3xl font-bold text-white mb-3">Simulation Under Construction</h2>
+            <p className="text-slate-400 max-w-md mx-auto mb-8">
+                An interactive simulation for this use case is currently being built. Check back soon for the full experience.
+            </p>
+            <button 
+                onClick={onBack}
+                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg transition-colors flex items-center gap-2 mx-auto"
+            >
+                <i className="fas fa-arrow-left"></i> Return to Details
+            </button>
+        </div>
+    </div>
+);
 
 
 export const UseCaseDetail: React.FC<UseCaseDetailProps> = ({ useCase, onBack }) => {
@@ -184,10 +206,17 @@ export const UseCaseDetail: React.FC<UseCaseDetailProps> = ({ useCase, onBack })
   }, [useCase, modalHtml]);
 
   if (showSim) {
+      if (useCase.id === 1) {
+         return <PredictiveIntelligenceSim onBack={() => setShowSim(false)} />;
+      }
       if (useCase.id === 101) {
           return <ServiceNowInfographic onBack={() => setShowSim(false)} />;
       }
-      return <PredictiveIntelligenceSim onBack={() => setShowSim(false)} />;
+      if (useCase.id === 2) {
+          return <VirtualAgentSim onBack={() => setShowSim(false)} />;
+      }
+      // Fallback for ID 2 or others without a specific sim yet
+      return <ComingSoonSim onBack={() => setShowSim(false)} />;
   }
 
   return (

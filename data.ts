@@ -1,4 +1,7 @@
 
+
+
+
 export interface UseCase {
   id: number;
   icon: string;
@@ -146,20 +149,20 @@ const useCase1SolutionFlow = `
 export const initialUseCases: UseCase[] = [
   {
       id: 1,
-      title: 'AI Powered ServiceNow for Data Integrity, Accuracy and Analytics',
+      title: 'Intelligent Field Prediction & Autofill',
       tag: 'Featured',
       icon: 'fa-cogs',
-      description: 'Integrate AI in ServiceNow to auto-populate critical fields, link incidents with changes, and detect recurring issues using machine learning and NLP for higher accuracy and proactive incident management.',
+      description: 'Leverage AI-powered predictive models to recommend the most suitable attributes for each incident, improving data quality and accelerating resolution.',
       infographicHTML: useCase1Infographic,
       architectureHTML: useCase1Architecture,
       solutionFlowHTML: useCase1SolutionFlow
   },
   {
       id: 101, // Duplicate of ID 1
-      title: 'AI Powered ServiceNow for Data Integrity, Accuracy and Analytics (Copy)',
+      title: 'Improved Incident Resolution Through Automated Linkage',
       tag: 'Featured',
       icon: 'fa-cogs',
-      description: 'Integrate AI in ServiceNow to auto-populate critical fields, link incidents with changes, and detect recurring issues using machine learning and NLP for higher accuracy and proactive incident management.',
+      description: 'Use PI to identify and establish dependencies between incidents, improving correlation, reducing duplicates, and enhancing service insights.',
       infographicHTML: useCase1Infographic,
       architectureHTML: useCase1Architecture,
       solutionFlowHTML: useCase1SolutionFlow
@@ -169,7 +172,7 @@ export const initialUseCases: UseCase[] = [
       title: 'AI-Powered L1 Ticket Automation & Self-Service Enablement', 
       tag: 'Automation',
       icon: 'fa-headset', 
-      description: 'Enhance L1 ticket management with AI-driven triaging, automated assignment, and intelligent escalation. Empower users through AI-based self-service and deploy Agentic AI bots integrated with ServiceNow to execute tasks end-to-end.', 
+      description: 'Empower end users with conversational, AI-driven assistance that delivers instant instructions and self-service guidance, improving resolution speed and reducing ticket volume.', 
       infographicHTML: `
           <div class="infographic-container">
               <header class="infographic-header animate-fade-in-down">

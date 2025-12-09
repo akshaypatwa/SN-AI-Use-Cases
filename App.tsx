@@ -120,7 +120,7 @@ const App: React.FC = () => {
                 updateUseCase={updateUseCase}
                 onSelect={handleCardSelect}
                 cardHeight={cardHeight}
-                isDisabled={index > 1}
+                isDisabled={index > 2}
                 />
             </div>
           ))}

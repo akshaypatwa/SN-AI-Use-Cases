@@ -19,7 +19,7 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({ useCase, isEditMode, u
   };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDisabled) return;
+    // Removed the disabled check to allow clicking
     if (isEditMode && (e.target as HTMLElement).isContentEditable) {
       return;
     }
@@ -69,7 +69,7 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({ useCase, isEditMode, u
         >
           {useCase.description}
         </p>
-         {!isEditMode && !isDisabled && (
+         {!isEditMode && (
           <div className="mt-4 text-sm font-semibold text-[var(--text-secondary)] group-hover:text-[var(--text-primary)] transition-colors duration-300 flex items-center">
             Learn More <i className="fas fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform duration-300"></i>
           </div>
@@ -81,9 +81,13 @@ export const UseCaseCard: React.FC<UseCaseCardProps> = ({ useCase, isEditMode, u
   // If Disabled: Render a wrapper to allow the "Coming Soon" tag to be colored (not grayscale)
   if (isDisabled) {
     return (
-      <div className="relative h-full" style={{ minHeight: `${cardHeight}px` }}>
+      <div 
+        className="relative h-full cursor-pointer group" 
+        style={{ minHeight: `${cardHeight}px` }}
+        onClick={handleClick}
+      >
         {/* The Card Background (Grayscale) */}
-        <div className="showcase-card h-full grayscale brightness-90 pointer-events-none select-none flex flex-col relative overflow-hidden">
+        <div className="showcase-card h-full grayscale brightness-90 select-none flex flex-col relative overflow-hidden transition-transform duration-300 group-hover:translate-y-[-5px]">
            {CardContent}
         </div>
         
