@@ -4,6 +4,7 @@ import { UseCaseCard } from './components/UseCaseCard';
 import { EditPanel } from './components/EditPanel';
 import { TerminologyModal } from './components/TerminologyModal';
 import { UseCaseDetail } from './components/UseCaseDetail';
+import { Background } from './components/Background';
 
 const App: React.FC = () => {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
@@ -74,18 +75,19 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen text-gray-200 p-4 sm:p-6 lg:p-8 relative">
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 lg:p-8 relative">
+      <Background />
       <div className="container mx-auto max-w-7xl relative z-10">
         <header className="text-center my-16 relative animate-fade-in-down">
-          <h1 className="text-5xl sm:text-7xl font-bold gradient-text">
+          <h1 className="text-5xl sm:text-7xl font-bold text-slate-100">
             ServiceNow Use Cases
           </h1>
-          <p className="text-lg text-gray-400 mt-4 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-400 mt-4 max-w-2xl mx-auto">
             Explore powerful capabilities of the ServiceNow platform.
             {!isEditMode && (
-              <button 
-                onClick={() => setIsEditMode(true)} 
-                className="ml-2 text-gray-400 hover:text-[var(--accent-color)] transition-colors text-sm font-semibold group"
+              <button
+                onClick={() => setIsEditMode(true)}
+                className="ml-2 text-slate-400 hover:text-emerald-400 transition-colors text-sm font-semibold group"
                 title="Edit Page"
               >
                 Edit Page <i className="fas fa-pencil-alt ml-1 opacity-70 group-hover:opacity-100 transition-opacity"></i>
@@ -121,21 +123,19 @@ const App: React.FC = () => {
         </main>
         
         <section className="mt-28 mb-12 text-center">
-            <div className="glowing-circle-container pressable">
-                <button 
-                    onClick={() => setIsModalOpen(true)} 
-                    className="demystify-button group relative inline-flex items-center justify-center gap-3 rounded-full bg-[var(--bg-color-base)] px-8 py-4 text-lg font-medium text-white transition-colors"
-                >
-                    <i className="fas fa-brain text-xl icon-gradient"></i>
-                    Demystify GenAI
-                </button>
-            </div>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:shadow-[0_0_25px_rgba(16,185,129,0.5)]"
+          >
+            <i className="fas fa-brain text-xl mr-2"></i>
+            Demystify GenAI
+          </button>
         </section>
         
         {isModalOpen && <TerminologyModal onClose={() => setIsModalOpen(false)} />}
         
-        <footer className="text-center mt-24 py-6 border-t border-white/10">
-          <p className="text-gray-500">&copy; 2025 ServiceNow Use Case Showcase</p>
+        <footer className="text-center mt-24 py-6 border-t border-emerald-500/20">
+          <p className="text-slate-400">&copy; 2025 ServiceNow Use Case Showcase</p>
         </footer>
       </div>
     </div>
