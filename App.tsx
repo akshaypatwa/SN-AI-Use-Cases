@@ -5,11 +5,19 @@ import { UseCaseCard } from './components/UseCaseCard';
 import { EditPanel } from './components/EditPanel';
 import { TerminologyModal } from './components/TerminologyModal';
 import { UseCaseDetail } from './components/UseCaseDetail';
+import { Dock } from './components/Dock';
+import { AgenticAIModal } from './components/AgenticAIModal';
+import { SetupModal } from './components/SetupModal';
 
 const App: React.FC = () => {
   const [useCases, setUseCases] = useState<UseCase[]>(initialUseCases);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Modal States
+  const [isConceptsModalOpen, setIsConceptsModalOpen] = useState(false);
+  const [isAgenticModalOpen, setIsAgenticModalOpen] = useState(false);
+  const [isSetupModalOpen, setIsSetupModalOpen] = useState(false);
+
   const [savedViews, setSavedViews] = useState<Record<string, UseCase[]>>({});
   const [cardHeight, setCardHeight] = useState(320); // initial height in px
   const [selectedUseCase, setSelectedUseCase] = useState<UseCase | null>(null);
@@ -75,7 +83,7 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen p-4 sm:p-6 lg:p-8 relative">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 relative pb-32"> {/* Added padding bottom for Dock */}
       <div className="container mx-auto max-w-7xl relative z-10">
         <header className="page-header text-center my-4 relative animate-fade-in-down">
             <div className="edit-page-button-container">
@@ -126,19 +134,17 @@ const App: React.FC = () => {
           ))}
         </main>
         
-        <section className="mt-28 mb-12 text-center">
-            <div className="glowing-circle-container pressable">
-                <button 
-                    onClick={() => setIsModalOpen(true)} 
-                    className="demystify-button group relative inline-flex items-center justify-center gap-3 rounded-full bg-[var(--bg-color-base)] px-8 py-4 text-lg font-medium text-[var(--text-primary)] transition-colors"
-                >
-                    <i className="fas fa-brain text-xl icon-gradient"></i>
-                    Demystify GenAI
-                </button>
-            </div>
-        </section>
+        {/* Floating Dock */}
+        <Dock 
+            onOpenConcepts={() => setIsConceptsModalOpen(true)}
+            onOpenAgentic={() => setIsAgenticModalOpen(true)}
+            onOpenSetup={() => setIsSetupModalOpen(true)}
+        />
         
-        {isModalOpen && <TerminologyModal onClose={() => setIsModalOpen(false)} />}
+        {/* Modals */}
+        {isConceptsModalOpen && <TerminologyModal onClose={() => setIsConceptsModalOpen(false)} />}
+        {isAgenticModalOpen && <AgenticAIModal onClose={() => setIsAgenticModalOpen(false)} />}
+        {isSetupModalOpen && <SetupModal onClose={() => setIsSetupModalOpen(false)} />}
         
         <footer className="text-center mt-24 py-6 border-t border-white/10">
           <p className="text-gray-500">&copy; 2025 ServiceNow Use Case Showcase</p>

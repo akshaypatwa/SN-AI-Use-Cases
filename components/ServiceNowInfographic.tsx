@@ -22,7 +22,8 @@ import {
   RefreshCw,
   Play,
   Pause,
-  ArrowLeft
+  ArrowLeft,
+  SkipForward
 } from 'lucide-react';
 
 interface Props {
@@ -206,16 +207,16 @@ const ServiceNowInfographic: React.FC<Props> = ({ onBack }) => {
   };
 
   const pipelineSteps = [
-    { title: 'Analyze Records', icon: Database, desc: 'System identifies data clusters & quality', sub: 'STEP 01' },
-    { title: 'Create Model', icon: FileText, desc: 'Select fields and define solution scope', sub: 'STEP 02' },
-    { title: 'Train Logic', icon: RefreshCw, desc: 'Feed historical data to tune accuracy', sub: 'STEP 03' },
-    { title: 'Runtime Predict', icon: Zap, desc: 'Apply recommendations in real-time', sub: 'STEP 04' },
+    { title: 'Ingest Incidents', icon: Database, desc: 'Continuous ingestion of historical data', sub: 'STEP 01' },
+    { title: 'Word Corpus', icon: FileText, desc: 'Build vocabulary & frequency maps', sub: 'STEP 02' },
+    { title: 'Cluster Similarities', icon: Layers, desc: 'Group incidents by text distance', sub: 'STEP 03' },
+    { title: 'Recommendation', icon: Zap, desc: 'Real-time lookup for new tickets', sub: 'STEP 04' },
   ];
 
   // --- State for Simulator ---
   const [simState, setSimState] = useState('idle');
   const [cursorPos, setCursorPos] = useState({ top: '85%', left: '90%' });
-  const [isPaused, setIsPaused] = useState(false);
+  const [isPaused, setIsPaused] = useState(true); // Default to Paused for manual control
 
   // Manual Handlers
   const handleManualPredict = () => {
@@ -234,77 +235,121 @@ const ServiceNowInfographic: React.FC<Props> = ({ onBack }) => {
     setSimState('done');
   };
 
+  const handleNextStep = () => {
+    setIsPaused(true); // Ensure manual control
+    switch (simState) {
+        case 'idle':
+            setSimState('clickingBtn');
+            setCursorPos({ top: '8%', left: '92%' });
+            break;
+        case 'movingToBtn':
+        case 'clickingBtn':
+            setSimState('analyzing');
+            setCursorPos({ top: '40%', left: '60%' });
+            break;
+        case 'analyzing':
+        case 'processing':
+            setSimState('showingModal');
+            break;
+        case 'showingModal':
+            setSimState('applying');
+            setCursorPos({ top: '88%', left: '80%' });
+            break;
+        case 'movingToApply':
+        case 'applying':
+            setSimState('done');
+            break;
+        case 'done':
+            setSimState('idle');
+            setCursorPos({ top: '85%', left: '90%' });
+            break;
+        default:
+            setSimState('idle');
+            break;
+    }
+  };
+
   // Simulator Logic Loop
   useEffect(() => {
     let timeout: any;
     
-    // Define states that should ALWAYS auto-advance (transient/system states), even if paused.
-    // 'analyzing' -> 'processing' -> 'showingModal' sequence is a system response.
-    // 'applying' -> 'done' is a system response.
-    // User only pauses "Idle" or "Waiting" states.
-    const transientStates = ['analyzing', 'processing', 'applying', 'clickingBtn'];
-    
-    // If paused and we are NOT in a transient state, do not advance.
-    if (isPaused && !transientStates.includes(simState)) {
-      return;
+    // Auto-advance logic only if NOT paused
+    if (!isPaused) {
+        const runSimulation = () => {
+          switch (simState) {
+            case 'idle':
+              timeout = setTimeout(() => {
+                setSimState('movingToBtn');
+                setCursorPos({ top: '8%', left: '92%' }); 
+              }, 2000);
+              break;
+            case 'movingToBtn':
+              timeout = setTimeout(() => {
+                setSimState('clickingBtn');
+              }, 1500);
+              break;
+            case 'clickingBtn':
+              timeout = setTimeout(() => {
+                setSimState('analyzing'); // Step 2: Invoke
+                setCursorPos({ top: '40%', left: '60%' });
+              }, 500);
+              break;
+            case 'analyzing':
+              timeout = setTimeout(() => {
+                setSimState('processing'); // Step 3: Match
+              }, 1500);
+              break;
+            case 'processing':
+              timeout = setTimeout(() => {
+                setSimState('showingModal'); // Step 4: Populate
+              }, 1500);
+              break;
+            case 'showingModal':
+              timeout = setTimeout(() => {
+                setSimState('movingToApply');
+                setCursorPos({ top: '88%', left: '80%' });
+              }, 3000); // Wait longer to read
+              break;
+            case 'movingToApply':
+              timeout = setTimeout(() => {
+                setSimState('applying');
+              }, 1500);
+              break;
+            case 'applying':
+              timeout = setTimeout(() => {
+                setSimState('done');
+              }, 500);
+              break;
+            case 'done':
+              timeout = setTimeout(() => {
+                setSimState('idle');
+                setCursorPos({ top: '85%', left: '90%' });
+              }, 4000);
+              break;
+            default:
+              break;
+          }
+        };
+        runSimulation();
+    } else {
+        // Even when paused, ensure smooth transitions for visual states that shouldn't hang
+        // (e.g. clicking animation shouldn't freeze mid-click forever, but logic waits)
+        if (simState === 'movingToBtn') {
+             // Optional: Snap to end of movement if paused? Or just let it sit.
+             // Let's just let manual control handle it.
+        }
+        if (simState === 'analyzing') {
+            timeout = setTimeout(() => {
+                setSimState('processing');
+            }, 1500);
+        }
+        if (simState === 'processing') {
+             timeout = setTimeout(() => {
+                setSimState('showingModal');
+            }, 1500);
+        }
     }
 
-    const runSimulation = () => {
-      switch (simState) {
-        case 'idle':
-          timeout = setTimeout(() => {
-            setSimState('movingToBtn');
-            setCursorPos({ top: '8%', left: '92%' }); 
-          }, 2000);
-          break;
-        case 'movingToBtn':
-          timeout = setTimeout(() => {
-            setSimState('clickingBtn');
-          }, 1500);
-          break;
-        case 'clickingBtn':
-          timeout = setTimeout(() => {
-            setSimState('analyzing'); // Step 2: Invoke
-            setCursorPos({ top: '40%', left: '60%' });
-          }, 500);
-          break;
-        case 'analyzing':
-          timeout = setTimeout(() => {
-            setSimState('processing'); // Step 3: Match
-          }, 1500);
-          break;
-        case 'processing':
-          timeout = setTimeout(() => {
-            setSimState('showingModal'); // Step 4: Populate
-          }, 1500);
-          break;
-        case 'showingModal':
-          timeout = setTimeout(() => {
-            setSimState('movingToApply');
-            setCursorPos({ top: '88%', left: '80%' });
-          }, 1000);
-          break;
-        case 'movingToApply':
-          timeout = setTimeout(() => {
-            setSimState('applying');
-          }, 1500);
-          break;
-        case 'applying':
-          timeout = setTimeout(() => {
-            setSimState('done');
-          }, 500);
-          break;
-        case 'done':
-          timeout = setTimeout(() => {
-            setSimState('idle');
-            setCursorPos({ top: '85%', left: '90%' });
-          }, 4000);
-          break;
-        default:
-          break;
-      }
-    };
-    runSimulation();
     return () => clearTimeout(timeout);
   }, [simState, isPaused]);
 
@@ -363,7 +408,7 @@ const ServiceNowInfographic: React.FC<Props> = ({ onBack }) => {
           <div className="flex flex-col items-center justify-center mb-10 relative z-10 text-center">
             <div className="flex items-center gap-3 mb-2">
               <Layers className="text-emerald-400 w-8 h-8" />
-              <h2 className="text-3xl font-bold text-white">End-to-End Processing</h2>
+              <h2 className="text-3xl font-bold text-white">End-to-End PI Setup</h2>
             </div>
             <p className="text-slate-400 text-sm mb-6">Data transformation pipeline</p>
             
@@ -484,7 +529,15 @@ const ServiceNowInfographic: React.FC<Props> = ({ onBack }) => {
 
             {/* Controls */}
             <div className="mt-auto space-y-4">
-               {/* Pause/Play Button */}
+               {/* Next Step Button (Primary Control) */}
+               <button 
+                 onClick={handleNextStep}
+                 className="w-full flex items-center justify-center gap-2 px-3 py-3 rounded-lg font-bold text-sm bg-emerald-600 hover:bg-emerald-500 text-white transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)]"
+               >
+                  <SkipForward size={16} fill="currentColor" /> Next Step
+               </button>
+
+               {/* Pause/Play Button (Secondary) */}
                <button 
                  onClick={() => setIsPaused(!isPaused)}
                  className={`w-full flex items-center justify-center gap-2 px-3 py-2 rounded border text-[10px] font-bold uppercase tracking-wider transition-all
@@ -494,7 +547,7 @@ const ServiceNowInfographic: React.FC<Props> = ({ onBack }) => {
                  `}
                >
                   {isPaused ? <Play size={12} fill="currentColor" /> : <Pause size={12} fill="currentColor" />}
-                  {isPaused ? "Resume Simulator" : "Running (Live)"}
+                  {isPaused ? "Auto-Play Disabled" : "Auto-Play Running"}
                </button>
             </div>
           </div>
@@ -537,7 +590,7 @@ const ServiceNowInfographic: React.FC<Props> = ({ onBack }) => {
                   `}
                 >
                    {simState === 'analyzing' || simState === 'processing' ? <Zap className="animate-spin" size={14}/> : <Brain size={14} />}
-                   {simState === 'analyzing' || simState === 'processing' ? 'Processing...' : 'Predict'}
+                   {simState === 'analyzing' || simState === 'processing' ? 'Processing...' : 'Get Similar Incidents'}
                 </button>
               </div>
             </div>

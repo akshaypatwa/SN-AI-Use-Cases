@@ -2,6 +2,8 @@
 
 
 
+
+
 export interface UseCase {
   id: number;
   icon: string;
@@ -172,7 +174,7 @@ export const initialUseCases: UseCase[] = [
       title: 'AI-Powered L1 Ticket Automation & Self-Service Enablement', 
       tag: 'Automation',
       icon: 'fa-headset', 
-      description: 'Empower end users with conversational, AI-driven assistance that delivers instant instructions and self-service guidance, improving resolution speed and reducing ticket volume.', 
+      description: 'AI provides instant, conversational self-service guidance, speeding resolution and lowering ticket volume.', 
       infographicHTML: `
           <div class="infographic-container">
               <header class="infographic-header animate-fade-in-down">

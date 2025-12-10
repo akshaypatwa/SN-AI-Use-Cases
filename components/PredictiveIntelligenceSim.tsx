@@ -279,7 +279,7 @@ export const PredictiveIntelligenceSim: React.FC<Props> = ({ onBack }) => {
         <div className="glass-panel rounded-3xl p-8 md:p-10 border-emerald-500/10">
             <div className="mb-10 text-center relative">
                 <h2 className="text-2xl font-bold text-white flex items-center justify-center gap-2">
-                    <Layers className="text-emerald-400" /> End-to-End Processing
+                    <Layers className="text-emerald-400" /> End-to-End PI Setup
                 </h2>
                 <p className="text-slate-400 text-sm mt-1 mb-4">Data transformation pipeline</p>
                 
